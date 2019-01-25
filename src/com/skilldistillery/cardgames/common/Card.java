@@ -13,6 +13,14 @@ public class Card {
 		this.rank = rank;
 		this.suit = suit;
 	}
+	
+	public Rank getRank() {
+		return rank;
+	}
+
+	public Suit getSuit() {
+		return suit;
+	}
 
 	@Override
 	public int hashCode() {
