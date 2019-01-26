@@ -3,7 +3,7 @@ package com.skilldistillery.cardgames.common;
 public class Card {
 	private Rank rank;
 	private Suit suit;
-	
+
 	public Card() {
 		super();
 	}
@@ -13,7 +13,7 @@ public class Card {
 		this.rank = rank;
 		this.suit = suit;
 	}
-	
+
 	public Rank getRank() {
 		return rank;
 	}
@@ -30,7 +30,6 @@ public class Card {
 		result = prime * result + ((suit == null) ? 0 : suit.hashCode());
 		return result;
 	}
-	
 
 	@Override
 	public boolean equals(Object obj) {
@@ -50,16 +49,13 @@ public class Card {
 
 	@Override
 	public String toString() {
-		return "Card rank=" + rank + " of" + " suit=" + suit + "\n" ;
+		return "Card rank=" + rank + " of" + " suit=" + suit + "\n";
 	}
-	
+
 	public int getValue() {
-		
+
 		return rank.getValue();
-		
+
 	}
-	
-	
-	
-	
+
 }

@@ -1,10 +1,6 @@
 package com.skilldistillery.cardgames.blackjack;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-
-import com.skilldistillery.cardgames.common.Card;
 
 public class BlackjackHandSim {
 
@@ -20,11 +16,8 @@ public class BlackjackHandSim {
 	}
 
 	public void runBlackjackHand(Scanner sc) {
-		List<Card> blackJackDeck = new ArrayList<>();
-
-		System.out.println("How many cards would you like to add?");
-
-		int input = sc.nextInt();
+		BlackjackHand(sc);
+		
 		sc.close();
 	}
 

@@ -20,7 +20,6 @@ public abstract class Hand {
 	}
 
 	// This method calls the Card object to construct a new card and add it to the
-	// deck
 	public void addCard(Card card) {
 		hand.add(card);
 	}
