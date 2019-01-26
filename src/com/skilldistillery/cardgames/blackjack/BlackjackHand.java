@@ -2,8 +2,6 @@ package com.skilldistillery.cardgames.blackjack;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
 import com.skilldistillery.cardgames.common.Card;
 import com.skilldistillery.cardgames.common.Hand;
 
