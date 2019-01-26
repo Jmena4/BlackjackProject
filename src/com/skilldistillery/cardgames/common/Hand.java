@@ -4,35 +4,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Hand {
-	List<Card> newDeck = new ArrayList<>();
-	
+	private List<Card> hand;
+
 	public Hand() {
+		this.hand = new ArrayList<Card>();
 
 	}
 
 	public int getHandValue() {
-
-		return 0;
+		int handValue = 0;
+		for (Card card : hand) {
+			handValue += card.getRank().getValue();
+		}
+		return handValue;
 	}
 
-	public void addCard(Rank rank, Suit suit) {
-
+	// This method calls the Card object to construct a new card and add it to the
+	// deck
+	public void addCard(Card card) {
+		hand.add(card);
 	}
 
 	public void clearHand() {
-
+		hand.clear();
 	}
 
-	public List<Card> getCars() {
-
-		return null;
-
+	public List<Card> getCards() {
+		return hand;
 	}
 
 	@Override
 	public String toString() {
-
-		return null;
+		String handPrintOut = "";
+		for (Card card : hand) {
+			handPrintOut += card.toString();
+		}
+		return handPrintOut;
 
 	}
 
