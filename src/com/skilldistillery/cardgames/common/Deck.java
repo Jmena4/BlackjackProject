@@ -20,9 +20,9 @@ public class Deck {
 		}
 		return deck;
 	}
- 
+
 	public void shuffle() {
-		
+
 		Collections.shuffle(cards);
 	}
 
