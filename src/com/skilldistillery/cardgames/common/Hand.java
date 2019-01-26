@@ -1,13 +1,11 @@
 package com.skilldistillery.cardgames.common;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.skilldistillery.cardgames.common.Card;
-import com.skilldistillery.cardgames.common.Rank;
-import com.skilldistillery.cardgames.common.Suit;
-
 public abstract class Hand {
-
+	List<Card> newDeck = new ArrayList<>();
+	
 	public Hand() {
 
 	}

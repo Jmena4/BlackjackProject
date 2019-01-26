@@ -7,11 +7,11 @@ import java.util.List;
 public class Deck {
 	private List<Card> cards = new ArrayList<>();
 
-	public Deck(List<Card> newCards) {
-		this.cards = newCards;
+	public Deck() {
+		this.cards = createDeck();
 	}
 
-	private List<Card> createDeck(List<Card> newlyPrintedCards) {
+	private List<Card> createDeck() {
 		List<Card> deck = new ArrayList<>(52);
 		for (Suit s : Suit.values()) {
 			for (Rank r : Rank.values()) {
@@ -20,8 +20,9 @@ public class Deck {
 		}
 		return deck;
 	}
-
+ 
 	public void shuffle() {
+		
 		Collections.shuffle(cards);
 	}
 
@@ -30,8 +31,8 @@ public class Deck {
 		return cards.size();
 	}
 
-	public void dealCard() {
-		cards.remove(0);
+	public Card dealCard() {
+		return cards.remove(0);
 	}
 
 }
