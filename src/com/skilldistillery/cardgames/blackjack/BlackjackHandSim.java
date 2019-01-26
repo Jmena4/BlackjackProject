@@ -22,17 +22,34 @@ public class BlackjackHandSim {
 	}
 
 	public void runBlackjackHand(Scanner sc) {
-
+//		Blackjack  Deck is created
 		Deck blackjackDeck = new Deck();
+
+//		Deck is shuffled
 		blackjackDeck.shuffle();
+
+//		Player hand and Dealer hand  created
 		BlackjackHand playerHand = new BlackjackHand();
 		BlackjackHand dealerHand = new BlackjackHand();
+//		First pair of cards dealt
 		playerHand.addCard(blackjackDeck.dealCard());
-		playerHand.getHandValue();
 		dealerHand.addCard(blackjackDeck.dealCard());
+		
+		playerHand.getHandValue();
 		dealerHand.getHandValue();
+		
 		System.out.println("Player hand: " + playerHand);
 		System.out.println("Dealer hand: " + dealerHand);
+
+//		Second pair of Cards dealt
+		playerHand.addCard(blackjackDeck.dealCard());
+		dealerHand.addCard(blackjackDeck.dealCard());
+		
+//		playerHand.getHandValue();
+//		dealerHand.getHandValue();
+//
+//		System.out.println("Player hand: " + playerHand);
+//		System.out.println("Dealer hand: " + dealerHand);
 
 //		String input = "";
 //		do {
