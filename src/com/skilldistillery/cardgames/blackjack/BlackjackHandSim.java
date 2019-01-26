@@ -21,13 +21,13 @@ public class BlackjackHandSim {
 	}
 	
 	public void runBlackjackHand(Scanner sc) {
-		List<Card> deckDealing = new ArrayList<>();
+		List<Card> blackJackDeck = new ArrayList<>();
 		
 		System.out.println("How many cards would you like to add?");
+		
 		try {
 		int input = sc.nextInt();
-		deckDealing.
-		}
+		if 
 		sc.close();
 	}
 
