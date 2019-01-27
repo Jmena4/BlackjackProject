@@ -33,24 +33,41 @@ public class BlackjackHandSim {
 		BlackjackHand dealerHand = new BlackjackHand();
 //		First pair of cards dealt
 		playerHand.addCard(blackjackDeck.dealCard());
+//		System.out.println(playerHand.getHandValue());
+
 		dealerHand.addCard(blackjackDeck.dealCard());
-		
-		playerHand.getHandValue();
 		dealerHand.getHandValue();
-		
-		System.out.println("Player hand: " + playerHand);
-		System.out.println("Dealer hand: " + dealerHand);
 
 //		Second pair of Cards dealt
 		playerHand.addCard(blackjackDeck.dealCard());
-		dealerHand.addCard(blackjackDeck.dealCard());
-		
-//		playerHand.getHandValue();
-//		dealerHand.getHandValue();
-//
-//		System.out.println("Player hand: " + playerHand);
-//		System.out.println("Dealer hand: " + dealerHand);
+		System.out.print("Player hand: \n" + playerHand + " ");
+		System.out.println("Player score" + " " + playerHand.getHandValue());
 
+		System.out.println();
+
+		dealerHand.addCard(blackjackDeck.dealCard());
+		System.out.print("Dealer hand: \n" + dealerHand + " ");
+		System.out.println("Dealer score" + " " + dealerHand.getHandValue());
+
+		int playerScore = playerHand.getHandValue();
+		int dealerScore = dealerHand.getHandValue();
+
+		if (playerScore == 21 || dealerScore == 21) {
+			System.out.println("Blackjack!!!");
+		} else {
+			while (playerScore == 21) {
+				System.out.println("\nWould you like to: \n1)Hit or \n2)Stay");
+				int choice = sc.nextInt();
+				switch (choice) {
+				case 1:
+					System.out.println("Construct a hit");
+					break;
+				case 2:
+					System.out.println("Construct a Stay");
+					break;
+				}
+			}
+		}
 //		String input = "";
 //		do {
 //			System.out.println("Would you like to play of a game of BlackJack? "
