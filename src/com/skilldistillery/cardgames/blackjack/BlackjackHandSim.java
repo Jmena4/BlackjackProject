@@ -47,11 +47,11 @@ public class BlackjackHandSim {
 //		Second pair of Cards dealt
 			playerHand.addCard(blackjackDeck.dealCard());
 			System.out.print("Player hand: \n" + playerHand);
-			System.out.println("\tPlayer score" + " " + playerHand.getHandValue());
+			System.out.println("\tPlayer score:" + " " + playerHand.getHandValue());
 			System.out.println();
 			System.out.print("Dealer hand: \n" + dealerHand);
 			System.out.println("Card: ****FaceDown****");
-			System.out.println("\tDealer score" + " " + dealerHand.getHandValue());
+			System.out.println("\tDealer score:" + " " + dealerHand.getHandValue());
 
 			dealerHand.addCard(blackjackDeck.dealCard());
 
@@ -80,34 +80,41 @@ public class BlackjackHandSim {
 						playerHand.addCard(blackjackDeck.dealCard());
 						playerScore = playerHand.getHandValue();
 						System.out.print(playerHand);
-						System.out.println("\tPlayer Score " + playerScore);
+						System.out.println("\tPlayer Score: " + playerScore);
 
 						break;
 					case 2:
 						System.out.println("Player Stays: ");
 //						System.out.println(dealerHand.getHandValue());
-						System.out.println("Dealer hand: \n" + dealerHand);
-						if (dealerScore <= 16) {
+						System.out.print("Dealer hand: \n" + dealerHand );
+						System.out.println("\tDealer score: " + dealerScore);
+						System.out.println();
+
+						if (dealerScore < 17) {
 							dealerHand.addCard(blackjackDeck.dealCard());
-							System.out.println("Dealer hand: \n" + dealerHand);
+							System.out.print("Dealer hand: \n" + dealerHand);
 						}
 
 						// compare scores to determine a 1 winner here
 						if (playerScore > dealerScore) {
+							System.out.println("\tPlayer Score: " + playerHand.getHandValue());
+							System.out.println("\tDealerScore: " + dealerHand.getHandValue());
 							playerWin();
-							System.out.println("Player Score " + playerHand.getHandValue());
-							System.out.println("DealerScore " + dealerHand.getHandValue());
 						} else if (dealerScore > playerScore) {
+							System.out.println("\tPlayer Score: " + playerHand.getHandValue());
+							System.out.println("\tDealerScore: " + dealerHand.getHandValue());
 							dealerWin();
-							System.out.println("Player Score " + playerHand.getHandValue());
-							System.out.println("DealerScore " + dealerHand.getHandValue());
 							break;
 						}
 					}
 					if (playerScore > 21 || dealerScore > 21) {
 						checkBust(playerScore, dealerScore);
 					}
-					while (choice != 2 && playerScore < 21)
+					if (playerScore == dealerScore) {
+						System.out.println("Dealer and Player both push!!!");
+						System.out.println("Both scores equal: " + playerScore);
+					}
+					while (choice != 2 && playerScore <= 21)
 						;
 					if (go != false) {
 						dealerHand.clearHand();
