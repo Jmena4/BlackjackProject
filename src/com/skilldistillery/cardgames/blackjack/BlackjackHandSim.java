@@ -1,29 +1,24 @@
 package com.skilldistillery.cardgames.blackjack;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
 import java.util.Scanner;
 
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
-
-import com.skilldistillery.cardgames.common.Card;
 import com.skilldistillery.cardgames.common.Deck;
 
 public class BlackjackHandSim {
-	private List<Card> blackjackGame = new ArrayList<>();
 	static Scanner sc = new Scanner(System.in);
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, Exception {
 		BlackjackHandSim app = new BlackjackHandSim();
 		app.run();
 
 	}
 
-	public void run() {
+	public void run() throws IOException {
 		runBlackjackHand(sc);
 	}
 
-	public void runBlackjackHand(Scanner sc) {
+	public void runBlackjackHand(Scanner sc) throws IOException {
 
 		boolean go = true;
 		int choice = 0;
@@ -68,13 +63,7 @@ public class BlackjackHandSim {
 			} else {
 				do {
 					System.out.println("\nWould you like to: \n1)Hit or \n2)Stay");
-					try {
-						choice = sc.nextInt();
-					} catch (Exception e) {
-
-						e.printStackTrace();
-						break;
-					}
+					choice = sc.nextInt();
 					switch (choice) {
 					case 1:
 						playerHand.addCard(blackjackDeck.dealCard());
@@ -85,7 +74,6 @@ public class BlackjackHandSim {
 						break;
 					case 2:
 						System.out.println("Player Stays: ");
-//						System.out.println(dealerHand.getHandValue());
 						System.out.print("Dealer hand: \n" + dealerHand);
 						System.out.println("\tDealer score: " + dealerScore);
 						System.out.println();
@@ -131,6 +119,7 @@ public class BlackjackHandSim {
 					}
 
 				} while (go == true && blackjackDeck.checkDeckSize() >= 15);
+
 			}
 		}
 	}
@@ -141,10 +130,6 @@ public class BlackjackHandSim {
 
 	public void dealerWin() {
 		System.out.println("Dealer Wins!!!");
-	}
-
-	public void compareHands() {
-
 	}
 
 	public void checkBust(int playerScore, int dealerScore) {
