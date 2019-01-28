@@ -10,8 +10,7 @@ public class BlackjackHand extends Hand {
 
 	public BlackjackHand() {
 		blackjackDeck = new ArrayList<>();
-		
-		
+
 	}
 
 }
