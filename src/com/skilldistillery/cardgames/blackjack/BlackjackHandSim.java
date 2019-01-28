@@ -86,7 +86,7 @@ public class BlackjackHandSim {
 					case 2:
 						System.out.println("Player Stays: ");
 //						System.out.println(dealerHand.getHandValue());
-						System.out.print("Dealer hand: \n" + dealerHand );
+						System.out.print("Dealer hand: \n" + dealerHand);
 						System.out.println("\tDealer score: " + dealerScore);
 						System.out.println();
 
