@@ -49,7 +49,7 @@ public class Card {
 
 	@Override
 	public String toString() {
-		return "Card rank=" + rank + " of" + " suit=" + suit + "\n";
+		return rank + "("+rank.getValue() +")"+ " of " + suit + "\n";
 	}
 
 	public int getValue() {
