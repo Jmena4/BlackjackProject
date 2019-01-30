@@ -3,143 +3,18 @@ package com.skilldistillery.cardgames.blackjack;
 import java.io.IOException;
 import java.util.Scanner;
 
-import com.skilldistillery.cardgames.common.Deck;
-
 public class BlackjackHandSim {
 	static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) throws IOException, Exception {
 		BlackjackHandSim app = new BlackjackHandSim();
-		app.run();
+		app.runBlackjackHandSim(sc);
 
 	}
 
-	public void run() throws IOException {
-		runBlackjackHand(sc);
+	private void runBlackjackHandSim(Scanner sc) {
+		BlackjackHand newBlackjackHand = new BlackjackHand();
+		newBlackjackHand.runBlackjackHand();
 	}
 
-	public void runBlackjackHand(Scanner sc) throws IOException {
-
-		boolean go = true;
-		int choice = 0;
-
-		while (go) {
-//		Blackjack  Deck is created
-			Deck blackjackDeck = new Deck();
-//		Deck is shuffled
-			blackjackDeck.shuffle();
-
-//		Player hand and Dealer hand  created
-			BlackjackHand playerHand = new BlackjackHand();
-			BlackjackHand dealerHand = new BlackjackHand();
-//		First pair of cards dealt
-			playerHand.addCard(blackjackDeck.dealCard());
-//		System.out.println(playerHand.getHandValue());
-
-			dealerHand.addCard(blackjackDeck.dealCard());
-			dealerHand.getHandValue();
-
-//		Second pair of Cards dealt
-			playerHand.addCard(blackjackDeck.dealCard());
-			System.out.print("Player hand: \n" + playerHand);
-			System.out.println("\tPlayer score:" + " " + playerHand.getHandValue());
-			System.out.println();
-			System.out.print("Dealer hand: \n" + dealerHand);
-			System.out.println("Card: ****FaceDown****");
-			System.out.println("\tDealer score:" + " " + dealerHand.getHandValue());
-
-			dealerHand.addCard(blackjackDeck.dealCard());
-
-			int playerScore = playerHand.getHandValue();
-			int dealerScore = dealerHand.getHandValue();
-
-			if (playerScore == 21) {
-				System.out.println("\nPlayer Wins Blackjack!!!");
-
-			} else if (dealerScore == 21) {
-				System.out.print("Dealer hand: \n" + dealerHand + " "); // for testing
-				System.out.println("\nDealer Wins Blackjack!!!");
-
-			} else {
-				do {
-					System.out.println("\nWould you like to: \n1)Hit or \n2)Stay");
-					choice = sc.nextInt();
-					switch (choice) {
-					case 1:
-						playerHand.addCard(blackjackDeck.dealCard());
-						playerScore = playerHand.getHandValue();
-						System.out.print(playerHand);
-						System.out.println("\tPlayer Score: " + playerScore);
-
-						break;
-					case 2:
-						System.out.println("Player Stays: ");
-						System.out.print("Dealer hand: \n" + dealerHand);
-						System.out.println("\tDealer score: " + dealerScore);
-						System.out.println();
-
-						if (dealerScore < 17) {
-							dealerHand.addCard(blackjackDeck.dealCard());
-							System.out.print("Dealer hand: \n" + dealerHand);
-						}
-
-						// compare scores to determine a 1 winner here
-						if (playerScore > dealerScore) {
-							System.out.println("\tPlayer Score: " + playerHand.getHandValue());
-							System.out.println("\tDealerScore: " + dealerHand.getHandValue());
-							playerWin();
-						} else if (dealerScore > playerScore) {
-							System.out.println("\tPlayer Score: " + playerHand.getHandValue());
-							System.out.println("\tDealerScore: " + dealerHand.getHandValue());
-							dealerWin();
-							break;
-						}
-					}
-					if (playerScore > 21 || dealerScore > 21) {
-						checkBust(playerScore, dealerScore);
-					}
-					if (playerScore == dealerScore) {
-						System.out.println("Dealer and Player both push!!!");
-						System.out.println("Both scores equal: " + playerScore);
-					}
-					while (choice != 2 && playerScore <= 21)
-						;
-					if (go != false) {
-						dealerHand.clearHand();
-						playerHand.clearHand();
-						System.out.println("would you like to play another game?");
-						System.out.println("type '1' to continue or '2' to exit");
-						int relaunchchoice = sc.nextInt();
-						if (relaunchchoice == 1) {
-							runBlackjackHand(sc);
-						} else if (relaunchchoice == 2) {
-							System.out.println("Exiting Blackjack game...");
-							System.exit(1);
-						}
-					}
-
-				} while (go == true && blackjackDeck.checkDeckSize() >= 15);
-
-			}
-		}
-	}
-
-	public void playerWin() {
-		System.out.println("Player Wins!!!");
-	}
-
-	public void dealerWin() {
-		System.out.println("Dealer Wins!!!");
-	}
-
-	public void checkBust(int playerScore, int dealerScore) {
-		if (playerScore > 21) {
-			System.out.println(" \nPlayer Busts!!!");
-			dealerWin();
-			if (dealerScore > 21) {
-				System.out.println(" \nDealer Busts!!!");
-				playerWin();
-			}
-		}
-	}
 }
