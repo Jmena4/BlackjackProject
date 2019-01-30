@@ -3,7 +3,7 @@ package com.skilldistillery.cardgames.common;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Hand {
+public abstract class Hand extends Deck {
 	private List<Card> hand;
 
 	public Hand() {
