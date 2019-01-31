@@ -27,12 +27,10 @@ public class BlackjackHandSim {
 
 			blackjackWinner(p, d);
 			continueGame(p, d); // need to figure out location of continue game
-			System.out.println(d.getDeck().checkDeckSize());
-		} while (go != false && d.getDeck().checkDeckSize() > 15);
+//			System.out.println(d.getDeck().checkDeckSize());
+		} while (go != false || d.getDeck().checkDeckSize() > 15 || p.getHandValue() < 21 || d.getHandValue() < 21);
 		if (d.getDeck().checkDeckSize() <= 15) {
-			p.clearHand();
-			d.clearHand();
-			d.getDeck().shuffle();
+
 		}
 	}
 
@@ -82,6 +80,7 @@ public class BlackjackHandSim {
 				choice = sc.nextInt();
 			} catch (Exception e) {
 				System.out.println("Incorrect Input, try again...");
+				sc.close();
 			}
 
 			if (choice == 1) {
@@ -127,11 +126,11 @@ public class BlackjackHandSim {
 
 	private boolean blackjackWinner(BlackjackPlayer p, BlackjackDealer d) {
 		boolean go = true;
-		if (p.getHandValue() > d.getHandValue() && p.getHandValue() > 21) {
+		if (p.getHandValue() > d.getHandValue() && p.getHandValue() < 21) {
 			playerWin();
 			go = false;
 		}
-		if (p.getHandValue() < d.getHandValue() && d.getHandValue() > 21) {
+		if (p.getHandValue() < d.getHandValue() && d.getHandValue() < 21) {
 			dealerWin();
 			go = false;
 		}
@@ -146,7 +145,7 @@ public class BlackjackHandSim {
 	private void continueGame(BlackjackPlayer p, BlackjackDealer d) {
 		int choice = 0;
 		System.out.println("Would you like to continue playing?");
-		System.out.println("1) Continue \n 2) Exit?");
+		System.out.println("1) Continue \n2) Exit?");
 		try {
 			choice = sc.nextInt();
 			if (choice == 1) {
@@ -155,6 +154,10 @@ public class BlackjackHandSim {
 			}
 			if (choice == 2) {
 				System.out.println("Exiting...");
+				p.clearHand();
+				d.clearHand();
+				System.exit(1);
+//				d.getDeck().shuffle();
 //				sc.close();
 			}
 		} catch (Exception e) {
