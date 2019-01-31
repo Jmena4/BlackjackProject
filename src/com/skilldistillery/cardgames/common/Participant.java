@@ -27,4 +27,5 @@ public abstract class Participant {
 	public void clearHand() {
 		hand.clearHand();
 	}
+
 }
