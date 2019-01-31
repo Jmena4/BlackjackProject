@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class BlackjackHandSim {
 	static Scanner sc = new Scanner(System.in);
-	private int choice = 0;
 
 	public static void main(String[] args) throws IOException, Exception {
 		BlackjackHandSim app = new BlackjackHandSim();
@@ -19,15 +18,22 @@ public class BlackjackHandSim {
 		boolean go = true;
 		BlackjackPlayer p = new BlackjackPlayer();
 		BlackjackDealer d = new BlackjackDealer();
-//		while (go) {
-		drawBlackjackHand(p, d);
-		gotBlackjack(p, d);
-		playerHitOrStand(p, d);
+		do {
+			drawBlackjackHand(p, d);
+			gotBlackjack(p, d);
+			playerHitOrStand(p, d);
 
-		dealerHitOrStand(d);
+			dealerHitOrStand(d);
 
-		blackjackWinner(p, d);
-		continueGame(p, d); // need to figure out location of continue game
+			blackjackWinner(p, d);
+			continueGame(p, d); // need to figure out location of continue game
+			System.out.println(d.getDeck().checkDeckSize());
+		} while (go != false && d.getDeck().checkDeckSize() > 15);
+		if (d.getDeck().checkDeckSize() <= 15) {
+			p.clearHand();
+			d.clearHand();
+			d.getDeck().shuffle();
+		}
 	}
 
 //		while (go != false || d.getDeck().checkDeckSize() > 15) {
@@ -63,23 +69,30 @@ public class BlackjackHandSim {
 	}
 
 	private boolean playerHitOrStand(BlackjackPlayer p, BlackjackDealer d) {
-		boolean go = false;
+		int choice = 0;
+		boolean go = true;
 		do {
 			System.out.println("\nWould you like to: \n1)Hit or \n2)Stay");
+//			try {
+//				choice = sc.nextInt();
+//			} catch (Exception e) {
+//				System.out.println("Incorrect Input, try again...");
+//					}
 			try {
 				choice = sc.nextInt();
 			} catch (Exception e) {
 				System.out.println("Incorrect Input, try again...");
-				if (choice == 1) {
-					p.addCardToHand(d.dealCard());
-					go = true;
-					if (choice == 2) {
-						go = false;
-					}
-					System.out.println(p.getHand());
-					checkPlayerHandBust(p);
-				}
 			}
+
+			if (choice == 1) {
+				p.addCardToHand(d.dealCard());
+				go = true;
+			}
+			if (choice == 2) {
+				go = false;
+			}
+			System.out.println(p.getHand());
+			checkPlayerHandBust(p);
 		} while (choice != 2 && go != false);
 		return go;
 
@@ -114,15 +127,15 @@ public class BlackjackHandSim {
 
 	private boolean blackjackWinner(BlackjackPlayer p, BlackjackDealer d) {
 		boolean go = true;
-		if (p.getHandValue() > d.getHandValue()) {
+		if (p.getHandValue() > d.getHandValue() && p.getHandValue() > 21) {
 			playerWin();
 			go = false;
 		}
-		if (p.getHandValue() < d.getHandValue()) {
+		if (p.getHandValue() < d.getHandValue() && d.getHandValue() > 21) {
 			dealerWin();
 			go = false;
 		}
-		if (p.getHandValue() == d.getHandValue()) {
+		if (p.getHandValue() == d.getHandValue() && p.getHandValue() > 21 && d.getHandValue() > 21) {
 			System.out.println("Player push!!!");
 			System.out.println("Both scores equal: " + p.getHandValue());
 			go = false;
@@ -131,6 +144,7 @@ public class BlackjackHandSim {
 	}
 
 	private void continueGame(BlackjackPlayer p, BlackjackDealer d) {
+		int choice = 0;
 		System.out.println("Would you like to continue playing?");
 		System.out.println("1) Continue \n 2) Exit?");
 		try {
