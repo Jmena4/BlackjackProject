@@ -27,5 +27,11 @@ public abstract class Participant {
 	public void clearHand() {
 		hand.clearHand();
 	}
-
+	
+//	public void hitOrStand(Card c) {
+//		for (Hand hand : hand) {
+//			
+//		}
+//		hand.addCard(c);
+//	}
 }
