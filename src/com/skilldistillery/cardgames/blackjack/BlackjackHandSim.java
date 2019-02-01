@@ -26,18 +26,15 @@ public class BlackjackHandSim {
 			go = dealerHitOrStand(d);
 
 			go = blackjackWinner(p, d);
+			System.out.println(d.getDeck().checkDeckSize());
 			continueGame(p, d); // need to figure out location of continue game
-//			System.out.println(d.getDeck().checkDeckSize());
-		} while (go != false || d.getDeck().checkDeckSize() > 15 || p.getHandValue() < 21 || d.getHandValue() < 21);
-		if (d.getDeck().checkDeckSize() <= 15) {
-
-		}
-	}
-
-//		while (go != false || d.getDeck().checkDeckSize() > 15) {
-//			System.out.println(d.getHand().checkDeckSize()); // still reworking
+		} while (go != false || !(d.getDeck().checkDeckSize() < 15) || p.getHandValue() < 21 || d.getHandValue() < 21);
+//		if (d.getDeck().checkDeckSize() <= 15) {
+//			p.clearHand();
+//			d.clearHand();
+//			d.getDeck().shuffle();
 //		}
-//	}
+	}
 
 	private void drawBlackjackHand(BlackjackPlayer p, BlackjackDealer d) {
 		p.addCardToHand(d.dealCard());
@@ -97,7 +94,7 @@ public class BlackjackHandSim {
 		boolean go = true;
 		if (p.getHandValue() > 21) {
 			System.out.println(" \nPlayer Busts!!!");
-			System.out.println("Player score: " + p.getHandValue());
+			System.out.println("\tPlayer score: " + p.getHandValue());
 			go = false;
 		}
 		return go;
@@ -115,13 +112,12 @@ public class BlackjackHandSim {
 	}
 
 	private boolean checkDealerHandBust(BlackjackDealer d) {
-		boolean isbust = true;
+		boolean go = true;
 		if (d.getHandValue() > 21) {
 			System.out.println("Dealer Busts!!!");
-			isbust = false;
-//			System.out.println("Dealer score: " + d.getHandValue());
+			go = false;
 		}
-		return isbust;
+		return go;
 	}
 
 	private boolean blackjackWinner(BlackjackPlayer p, BlackjackDealer d) {
@@ -134,11 +130,12 @@ public class BlackjackHandSim {
 			dealerWin();
 			go = false;
 		}
-		if (p.getHandValue() == d.getHandValue() && p.getHandValue() > 21 && d.getHandValue() > 21) {
+		if (p.getHandValue() == d.getHandValue() && p.getHandValue() < 21 && d.getHandValue() < 21) {
 			System.out.println("Player push!!!");
-			System.out.println("Both scores equal: " + p.getHandValue());
+//			System.out.println("Both scores equal: " + p.getHandValue());
 			go = false;
 		}
+		System.out.println("\tPlayer score: " + p.getHandValue() + "\n" + "\tDealer score: " + d.getHandValue());
 		return go;
 	}
 
