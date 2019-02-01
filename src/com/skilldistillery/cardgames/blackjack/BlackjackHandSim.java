@@ -20,21 +20,24 @@ public class BlackjackHandSim {
 		BlackjackDealer d = new BlackjackDealer();
 		do {
 			drawBlackjackHand(p, d);
-			go = gotBlackjack(p, d);
+			go = playerGotBlackjack(p);
+			go = dealerGotBlackjack(d);
 			go = playerHitOrStand(p, d);
-
 			go = dealerHitOrStand(d);
-
 			go = blackjackWinner(p, d);
-			System.out.println(d.getDeck().checkDeckSize());
 			continueGame(p, d); // need to figure out location of continue game
-		} while (go != false || !(d.getDeck().checkDeckSize() < 15) || p.getHandValue() < 21 || d.getHandValue() < 21);
+			System.out.println(d.getDeck().checkDeckSize());
+
+		} while (go == true && (d.getDeck().checkDeckSize() >= 15) && p.getHandValue() < 21);
+
+	}
+	/* && d.getHandValue() < 21 */;
 //		if (d.getDeck().checkDeckSize() <= 15) {
 //			p.clearHand();
 //			d.clearHand();
 //			d.getDeck().shuffle();
 //		}
-	}
+//	}
 
 	private void drawBlackjackHand(BlackjackPlayer p, BlackjackDealer d) {
 		p.addCardToHand(d.dealCard());
@@ -48,16 +51,20 @@ public class BlackjackHandSim {
 		d.addCardToHand(d.dealCard());
 	}
 
-	private boolean gotBlackjack(BlackjackPlayer p, BlackjackDealer d) {
+	private boolean playerGotBlackjack(BlackjackPlayer p) {
+		boolean go = true;
+		if (p.getHandValue() == 21) {
+			System.out.println("\nPlayer Blackjack!!!");
+			go = false;
+		}
+		return go;
+	}
+
+	private boolean dealerGotBlackjack(BlackjackDealer d) {
 		boolean go = true;
 		if (d.getHandValue() == 21) {
 			System.out.println("Dealer hand: \n" + d.getHand());
 			System.out.println("\nDealer Blackjack!!!");
-
-			go = false;
-		}
-		if (p.getHandValue() == 21) {
-			System.out.println("\nPlayer Blackjack!!!");
 			go = false;
 		}
 		return go;
