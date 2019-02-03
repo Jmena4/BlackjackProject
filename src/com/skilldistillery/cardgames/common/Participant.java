@@ -28,10 +28,8 @@ public abstract class Participant {
 		hand.clearHand();
 	}
 	
-//	public void hitOrStand(Card c) {
-//		for (Hand hand : hand) {
-//			
-//		}
-//		hand.addCard(c);
-//	}
+	public void hitOrStand() {
+	
+		hand.dealCard();
+	}
 }
