@@ -28,9 +28,5 @@ public class BlackjackDealer extends Participant {
 		return deck.dealCard();
 
 	}
-//	public void dealerHitOrStand() {
-//		for (Hand card : deck) {
-//		deck.dealCard();
-//	}
 
 }
